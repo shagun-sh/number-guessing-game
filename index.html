@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Guess</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('https://assets.abcya.com/webp_22db94bf-dc6b-42d0-b9b4-fb3e2c641d16.jpg');
+        }
+        .header-box {
+            background-color: #ffb6c1;
+            color: DeepPink;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            border-radius: 20px;
+        }
+        .header-box h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .score-card {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-4">
+        <div class="header-box">
+            <h1>Random Guess</h1>
+        </div>
+    </div>
+    <div class="container text-center mt-4">
+        <div class="score-card">
+            <h5>Score Card</h5>
+            <p id="attempts">Attempts: 0</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Input your number between 0 to 100</h5>
+                <input type="number" id="user-input" class="form-control">
+                <button class="btn btn-primary mt-4" onclick="guess_num()" id="submit">Submit</button>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let randomnumber = Math.floor(Math.random() * 101);
+        let attempts = 0;
+
+        function guess_num() {
+            let result = document.getElementById('result');
+            let submit = document.getElementById('submit');
+            const guess = Number(document.getElementById('user-input').value);
+            attempts++;
+            document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
+            
+            console.log(guess);
+            if (guess === randomnumber) {
+                result.textContent = 'GREAT!! CORRECT ANSWER';
+                result.className = 'alert alert-success';
+                submit.disabled = true;
+                console.log("GREAT!! CORRECT ANSWER");
+            } else if (guess < randomnumber) {
+                result.textContent = 'TOO LOW!';
+                result.className = 'alert alert-danger';
+                console.log("TOO LOW!");
+            } else {
+                result.textContent = 'TOO HIGH!';
+                result.className = 'alert alert-danger';
+                console.log("TOO HIGH!");
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
